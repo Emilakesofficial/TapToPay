@@ -1,5 +1,4 @@
 venv
 .env
 .db.sqlite3
-.build.sh
-.render.yaml
+media/
