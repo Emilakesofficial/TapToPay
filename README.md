@@ -8,7 +8,7 @@ TapToPay is a modular, scalable backend POS system built with Django & DRF.Desig
 
 - Cart & Checkout System
 
-- Paystack Integration for Secure Payments
+- Paystack Integration for Secure Payments.
 
 - Merchant Customization (Tax, Service Fee, Tip)
 
