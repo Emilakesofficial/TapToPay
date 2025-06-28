@@ -23,9 +23,46 @@ class CustomUnitView(APIView):
                 if serializer.is_valid():
                     serializer.save()
                     return Response(serializer.data, status=status.HTTP_200_OK)
-                return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             except Exception as e:
                 return Response({'error':str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
+class CustomUnitDetailedView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request, id):
+        try:
+            unit = CustomUnit.objects.get(id=id)
+            serializer = CustomUnitSerializer(unit)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except CustomUnit.DoesNotExist:
+            return Response({'error': 'Unit not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error':str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+    def put(self, request, id):
+        try:        
+            unit = CustomUnit.objects.get(id=id)
+            serializer = CustomUnitSerializer(unit, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except CustomUnit.DoesNotExist:
+            return Response({'error': 'Unit not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    def delete(self, request, id):
+        try:
+            unit = CustomUnit.objects.get(id=id)
+            unit.delete()
+            return Response({'Unit deleted successfully'}, status=status.HTTP_200_OK)
+        except CustomUnit.DoesNotExist:
+            return Response({'error': 'Unit not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error':str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    
+
 class ProductView(APIView):
     permission_classes = [IsAuthenticated]
     
@@ -92,4 +129,3 @@ class ProductDetailView(APIView):
         except Exception as e:
             return Response({'error':str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
-
