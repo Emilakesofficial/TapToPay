@@ -36,10 +36,14 @@ urlpatterns = [
     path('api/merchant/', include('merchant.urls')),
     path('api/payment/', include('payment.urls')),
     path('api/report/', include('report.urls')),
-    path('', lambda request: JsonResponse({'message': 'TapToPay Merchant Backend API is live!'})),
+    path('', lambda request: JsonResponse({'message': 'Paypos Merchant Backend API is live!'})),
     
     path('token/', TokenObtainPairView.as_view()),
     path('token/refresh/', TokenRefreshView.as_view()),
+    
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
