@@ -45,7 +45,7 @@ Successful and failed counts
 
 # Per-Transaction Reporting
 Tracks each transaction including:
-User (Full Name)
+User
 Payment Reference
 Status (Success/Failed)
 Amount paid
@@ -59,6 +59,9 @@ Timestamp
 - **Payments**: Paystack API
 - **Docs**: Swagger (drf-yasg)
 - **DB**: SQLite (easily swappable to Postgres/MySQL)
+
+Swagger UI at: https://Paypos.onrender.com/swagger/
+ReDoc at: https://Paypos.onrender.com/redoc/
 
 # API Endpoint Screenshots
  ## users app

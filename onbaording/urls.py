@@ -20,7 +20,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="TapToPay Merchant API",
         default_version='v1',
-        description="API documentation for the Real Estate project",
+        description="API documentation for the TapToPay Merchant API project",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="adegbemiadekunle56@gmail.com"),
     ),
